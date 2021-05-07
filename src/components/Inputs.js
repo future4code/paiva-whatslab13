@@ -77,6 +77,14 @@ class Inputs extends React.Component {
 
   }
 
+  onKeyPress = (event) => {
+
+    if( event.key === "Enter" ) {
+      this.enviarMensagem()
+    }
+
+  }
+
   render() {
     return (
       <Form>
@@ -84,12 +92,13 @@ class Inputs extends React.Component {
           value={ this.state.remetenteInput }
           onChange={ this.onChangeRemetenteInput } 
           placeholder="Usuário"
+          onKeyPress={ this.onKeyPress }
         />
         <Input 
           value={ this.state.mensagemInput }
           onChange={ this.onChangeMensagemInput }
-          placeholder="Mensagem"
-
+          placeholder="Mensagem" 
+          onKeyPress={ this.onKeyPress }
         />
         <Button type="button" onClick={ this.enviarMensagem } >
           Enviar
