@@ -3,16 +3,21 @@ import styled from "styled-components";
 import './App.css';
 
 const Main = styled.main`
+  display: flex;  
   background-color: #e5ddd5;
   max-width: 600px;
   width: 100%;
   border: 1px solid #000000;
   height: 100vh;
   margin: 0 auto;
+  align-items: flex-end;
+  flex-wrap:wrap;
+
 `
 
 const Form = styled.form`
   display: grid;
+  height: 5vh;
   grid-template-columns: 2fr 7fr 1fr;
   grid-gap: 1%;
   padding: 1%;
@@ -20,12 +25,16 @@ const Form = styled.form`
 `
 
 const Input = styled.input`
+
   width: 100%;
   padding: 8px;
   border: 0;
   border-radius: 8px;
   font-size: 16px;
+ 
 `
+const Icones = styled.img`
+width: 05vw;`
 
 const Button = styled.button`
   background-color: #efefef;
@@ -47,13 +56,32 @@ const Button = styled.button`
     transform: translateY(6px)
   }
 `
+const Balao = styled.div`
+display:flex;
+background: white;
+align-items: flex-end;
+width:auto;
+height: 10vh;
+line-height:10vh;`
+
+const Header = styled.section`
+display: flex;
+width: 100vw;
+height: 05vh;
+color: white;
+background-color: #015f57;
+`
+const Nome= styled.h1`
+font-size: 1em;`
+
+
 
 class App extends React.Component {
 
   state = {
     remetenteInput: "",
     mensagemInput: "",
-    mensagems: []
+    mensagens: []
   }
 
   onChangeRemetenteInput = (event) => {
@@ -80,7 +108,7 @@ class App extends React.Component {
     }
 
 
-    const novasMensagens = this.state.mensagems
+    const novasMensagens = this.state.mensagens
     novasMensagens.push(mensagem)
     this.setState({
       remetenteInput: "",
@@ -91,9 +119,22 @@ class App extends React.Component {
   }
 
   render() {
+    const mensagem = this.state.mensagens.map((sms)=>
+    <div>
+      <Balao>
+    <h3>{sms.remetente}</h3>:<p>{sms.mensagem}</p>
+    </Balao>
+    </div>
+    ) 
     return (
       <Main>
-      <Form>
+        <Header>
+          <Nome>Júllia Izidorio</Nome>
+          </Header>
+          
+        <Balao>{mensagem}</Balao>
+        
+        <Form>
         <Input 
           value={ this.state.remetenteInput }
           onChange={ this.onChangeRemetenteInput } 
