@@ -118,10 +118,34 @@ class App extends React.Component {
 
   }
 
+  onKeyPress = (event) => {
+
+    if(event.key === "Enter") {
+
+      this.enviarMensagem()
+
+    }
+
+  }
+
+  deleteMensagem = (deletar) => {
+
+    if( !window.confirm("Tem certeza que deseja deletar essa mensagem?") ) {
+
+      return
+
+    }
+
+    this.setState({
+      mensagens: this.state.mensagens.filter( (_, index) => index !== deletar)
+    })
+
+  }
+
   render() {
-    const mensagem = this.state.mensagens.map((sms)=>
+    const mensagem = this.state.mensagens.map((sms, index)=>
     <div>
-      <Balao>
+      <Balao onDoubleClick={ () => this.deleteMensagem(index) }>
     <h3>{sms.remetente}</h3>:<p>{sms.mensagem}</p>
     </Balao>
     </div>
@@ -139,12 +163,13 @@ class App extends React.Component {
           value={ this.state.remetenteInput }
           onChange={ this.onChangeRemetenteInput } 
           placeholder="Usuário"
+          onKeyPress={ this.onKeyPress }
         />
         <Input 
           value={ this.state.mensagemInput }
           onChange={ this.onChangeMensagemInput }
           placeholder="Mensagem"
-
+          onKeyPress={ this.onKeyPress }
         />
         <Button type="button" onClick={ this.enviarMensagem } >
           Enviar
