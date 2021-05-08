@@ -12,6 +12,7 @@ const Main = styled.main`
   margin: 0 auto;
   align-items: flex-end;
   flex-wrap:wrap;
+  
 
 `
 
@@ -33,8 +34,6 @@ const Input = styled.input`
   font-size: 16px;
  
 `
-const Icones = styled.img`
-width: 05vw;`
 
 const Button = styled.button`
   background-color: #efefef;
@@ -56,13 +55,22 @@ const Button = styled.button`
     transform: translateY(6px)
   }
 `
-const Balao = styled.div`
+const BalaoEu = styled.div`
 display:flex;
-background: white;
-align-items: flex-end;
+margin-bottom: 1%;
+padding: 1%;
+box-shadow: 1px 0.5px 1px;
+background: #dcf8c6;
 width:auto;
-height: 10vh;
-line-height:10vh;`
+height: auto;
+border-radius: 10px;
+min-width:10vw;
+max-width:40vw;`
+
+const Body = styled.body`
+
+display: block;
+`
 
 const Header = styled.section`
 display: flex;
@@ -145,19 +153,19 @@ class App extends React.Component {
   render() {
     const mensagem = this.state.mensagens.map((sms, index)=>
     <div>
-      <Balao onDoubleClick={ () => this.deleteMensagem(index) }>
-    <h3>{sms.remetente}</h3>:<p>{sms.mensagem}</p>
-    </Balao>
+      <BalaoEu onDoubleClick={ () => this.deleteMensagem(index) }>
+    <h3>{sms.remetente}</h3> <p> : </p> <p>{sms.mensagem}</p>
+    </BalaoEu>
     </div>
     ) 
     return (
       <Main>
         <Header>
-          <Nome>Júllia Izidorio</Nome>
+          <Nome>{this.Usuário}</Nome>
           </Header>
-          
-        <Balao>{mensagem}</Balao>
-        
+          <Body> {mensagem}</Body>
+       
+
         <Form>
         <Input 
           value={ this.state.remetenteInput }
